@@ -12,9 +12,7 @@ public class ModKeybinds {
     public static KeyMapping[] SLOT_KEYS = new KeyMapping[3];
 
     public static void register() {
-        // В 26.1 категория теперь KeyMapping.Category, а не строка
         KeyMapping.Category category = KeyMappingHelper.createCategory("key.categories.cardboost");
-
         SLOT_KEYS[0] = KeyMappingHelper.registerKeyMapping(new KeyMapping(
             "key.cardboost.slot1", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, category));
         SLOT_KEYS[1] = KeyMappingHelper.registerKeyMapping(new KeyMapping(
@@ -25,7 +23,7 @@ public class ModKeybinds {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             for (int i = 0; i < SLOT_KEYS.length; i++) {
                 if (SLOT_KEYS[i].consumeClick()) {
-                    ClientPlayNetworking.send(new ModNetwork.CardActivatePayload(i));
+                    ClientPlayNetworking.send(ModNetwork.CARD_ACTIVATE, ModNetwork.createActivatePacket(i));
                 }
             }
         });
