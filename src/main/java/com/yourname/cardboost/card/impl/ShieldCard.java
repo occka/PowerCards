@@ -12,7 +12,7 @@ public class ShieldCard extends Card {
 
     @Override
     public void onActivate(Player player) {
-        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 1));
+        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 100, 1));
         player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 0));
     }
 
