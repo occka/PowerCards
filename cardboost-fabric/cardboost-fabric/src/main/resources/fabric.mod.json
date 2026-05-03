@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "cardboost",
+  "version": "${version}",
+  "name": "Card Boost",
+  "description": "Карты усилений для игрока",
+  "license": "MIT",
+
+  "environment": "*",
+
+  "entrypoints": {
+    "main": ["com.yourname.cardboost.CardBoostMod"],
+    "client": ["com.yourname.cardboost.CardBoostModClient"]
+  },
+
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "fabric-api": "*",
+    "minecraft": "~26.1"
+  }
+}
