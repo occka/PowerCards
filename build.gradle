@@ -38,7 +38,7 @@ tasks.withType(JavaCompile).configureEach {
     it.options.release = 25
 }
 
-// Для 26.1 используем jar вместо remapJar
+// Добавляем LICENSE в артефакт
 jar {
     from('LICENSE') {
         rename { "${it}_${project.archives_base_name}" }
