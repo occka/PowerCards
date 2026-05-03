@@ -1,0 +1,9 @@
+{
+  "item.cardboost.card_speed": "Карта Скорости",
+  "item.cardboost.card_shield": "Карта Щита",
+  "itemGroup.cardboost.cards": "Карты усилений",
+  "key.cardboost.slot1": "Карта: Слот 1",
+  "key.cardboost.slot2": "Карта: Слот 2",
+  "key.cardboost.slot3": "Карта: Слот 3",
+  "key.categories.cardboost": "Карты усилений"
+}

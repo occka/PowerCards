@@ -1,0 +1,3 @@
+Сюда кладёшь текстуры:
+- card_speed.png  (16x16 px)
+- card_shield.png (16x16 px)
