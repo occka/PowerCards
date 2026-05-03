@@ -5,10 +5,10 @@ import com.yourname.cardboost.player.CardSlotManager;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class ModNetwork {
-    public static final Identifier CARD_ACTIVATE = Identifier.of(CardBoostMod.MOD_ID, "card_activate");
+    public static final ResourceLocation CARD_ACTIVATE = ResourceLocation.fromNamespaceAndPath(CardBoostMod.MOD_ID, "card_activate");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(CARD_ACTIVATE,

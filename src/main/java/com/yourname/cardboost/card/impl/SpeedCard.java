@@ -12,7 +12,7 @@ public class SpeedCard extends Card {
 
     @Override
     public void onActivate(Player player) {
-        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 1));
+        player.addEffect(new MobEffectInstance(MobEffects.SPEED, 100, 1));
     }
 
     @Override
