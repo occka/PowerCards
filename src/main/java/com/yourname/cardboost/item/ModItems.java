@@ -4,7 +4,7 @@ import com.yourname.cardboost.CardBoostMod;
 import com.yourname.cardboost.card.CardRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.item.Item;
 
 public class ModItems {
@@ -13,11 +13,11 @@ public class ModItems {
 
     public static void register() {
         CARD_SPEED = Registry.register(BuiltInRegistries.ITEM,
-            ResourceLocation.fromNamespaceAndPath(CardBoostMod.MOD_ID, "card_speed"),
+            Identifier.of(CardBoostMod.MOD_ID, "card_speed"),
             new CardItem(CardRegistry.getById("speed")));
 
         CARD_SHIELD = Registry.register(BuiltInRegistries.ITEM,
-            ResourceLocation.fromNamespaceAndPath(CardBoostMod.MOD_ID, "card_shield"),
+            Identifier.of(CardBoostMod.MOD_ID, "card_shield"),
             new CardItem(CardRegistry.getById("shield")));
     }
 }

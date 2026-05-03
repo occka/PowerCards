@@ -1,9 +1,8 @@
 package com.yourname.cardboost.card.impl;
 
 import com.yourname.cardboost.card.Card;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 
 public class SpeedCard extends Card {
@@ -13,8 +12,7 @@ public class SpeedCard extends Card {
 
     @Override
     public void onActivate(Player player) {
-        var effect = BuiltInRegistries.MOB_EFFECT.get(ResourceLocation.withDefaultNamespace("speed"));
-        if (effect != null) player.addEffect(new MobEffectInstance(effect, 100, 1));
+        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 1));
     }
 
     @Override
