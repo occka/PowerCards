@@ -1,21 +1,38 @@
 {
-  "schemaVersion": 1,
-  "id": "cardboost",
-  "version": "${version}",
-  "name": "Card Boost",
-  "description": "Карты усилений для игрока",
-  "license": "MIT",
-
-  "environment": "*",
-
-  "entrypoints": {
-    "main": ["com.yourname.cardboost.CardBoostMod"],
-    "client": ["com.yourname.cardboost.CardBoostModClient"]
-  },
-
-  "depends": {
-    "fabricloader": ">=0.18.0",
-    "fabric-api": "*",
-    "minecraft": "~26.1"
-  }
+	"schemaVersion": 1,
+	"id": "powercaeds",
+	"version": "${version}",
+	"name": "PowerCaeds",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/powercaeds/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"cards.modid.PowerCaeds"
+		],
+		"client": [
+			"cards.modid.client.PowerCaedsClient"
+		]
+	},
+	"mixins": [
+		"powercaeds.mixins.json",
+		{
+			"config": "powercaeds.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~26.1",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
 }
