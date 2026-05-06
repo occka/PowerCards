@@ -22,6 +22,12 @@ public abstract class PowerCard extends Item {
     public abstract int getPrimaryColor();
     public abstract int getSecondaryColor();
 
+    /**
+     * Relative chance for this card to appear in structure/chest loot.
+     * Higher values make the card more common; return 0 or less to disable chest loot for a card.
+     */
+    public int getStructureChestLootWeight() { return 5; }
+
     public int[] getSymbolPattern() {
         return new int[]{ 0b00110, 0b00100, 0b01110, 0b00100, 0b01100, 0b01000 };
     }

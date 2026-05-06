@@ -12,6 +12,9 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -21,6 +24,8 @@ import java.util.function.Function;
  *   3. Done.
  */
 public class CardRegistry {
+
+    private static final List<PowerCard> CARDS = new ArrayList<>();
 
     // ── Cards ─────────────────────────────────────────────────────────────────
     public static final SpeedCard SPEED_CARD =
@@ -32,6 +37,7 @@ public class CardRegistry {
                 Identifier.fromNamespaceAndPath(PowerCaeds.MOD_ID, name));
         T card = factory.apply(new Item.Properties().setId(key));
         Registry.register(BuiltInRegistries.ITEM, key, card);
+        CARDS.add(card);
         return card;
     }
 
@@ -48,7 +54,11 @@ public class CardRegistry {
         PowerCaeds.LOGGER.info("[PowerCaeds] CardRegistry initialized — {} card(s).", getCount());
     }
 
+    public static List<PowerCard> getCards() {
+        return Collections.unmodifiableList(CARDS);
+    }
+
     public static long getCount() {
-        return BuiltInRegistries.ITEM.stream().filter(i -> i instanceof PowerCard).count();
+        return CARDS.size();
     }
 }

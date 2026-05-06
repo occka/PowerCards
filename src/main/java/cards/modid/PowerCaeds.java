@@ -1,6 +1,7 @@
 package cards.modid;
 
 import cards.modid.card.CardRegistry;
+import cards.modid.handler.CardLootHandler;
 import cards.modid.handler.CardTickHandler;
 import cards.modid.handler.PlayerJoinHandler;
 import cards.modid.network.ActivateCardPacket;
@@ -22,13 +23,16 @@ public class PowerCaeds implements ModInitializer {
         // 1. Items / cards
         CardRegistry.init();
 
-        // 2. Network packets
+        // 2. Chest loot injection
+        CardLootHandler.register();
+
+        // 3. Network packets
         SyncCardSlotsPacket.register();   // S2C
         ActivateCardPacket.register();    // C2S — activate card by keybind
         EquipCardPacket.register();       // C2S — equip card from inventory
         UnequipCardPacket.register();     // C2S — unequip card back to inventory
 
-        // 3. Server-side event handlers
+        // 4. Server-side event handlers
         CardTickHandler.register();
         PlayerJoinHandler.register();
 
