@@ -50,6 +50,16 @@ public class ClientCardState {
         return cooldowns.get(slot);
     }
 
+    /** Advances the client-side cooldown display between server sync packets. */
+    public static void tickCooldowns() {
+        for (int i = 0; i < CardSlotsComponent.SLOT_COUNT; i++) {
+            int cooldown = cooldowns.get(i);
+            if (cooldown > 0) {
+                cooldowns.set(i, cooldown - 1);
+            }
+        }
+    }
+
     public static boolean isOnCooldown(int slot) {
         return cooldowns.get(slot) > 0;
     }

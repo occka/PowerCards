@@ -31,8 +31,8 @@ public class SpeedCard extends PowerCard {
         if (level.isClientSide()) return;
         // Lookup speed effect by registry key — avoids hardcoded field name issues
         Holder<MobEffect> speed = BuiltInRegistries.MOB_EFFECT
-                .getHolder(Identifier.withDefaultNamespace("speed"))
+                .get(Identifier.withDefaultNamespace("speed"))
                 .orElseThrow(() -> new IllegalStateException("Speed effect not found"));
-        player.addEffect(new MobEffectInstance(speed, 5 * 20, 1, false, true, true));
+        player.addEffect(new MobEffectInstance(speed, 5 * 20, 1, false, false, true));
     }
 }

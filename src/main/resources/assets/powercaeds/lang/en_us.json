@@ -3,6 +3,8 @@
 
   "item.powercaeds.speed_card": "Speed Card",
   "item.powercaeds.speed_card.desc": "Grants Speed II for 5 seconds.",
+  "item.powercaeds.totem_card": "Totem Card",
+  "item.powercaeds.totem_card.desc": "Passively saves you from lethal damage, then goes on a 5 minute cooldown.",
 
   "item.powercaeds.card.cooldown": "Cooldown: %ss",
 
