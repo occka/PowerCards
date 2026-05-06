@@ -4,10 +4,9 @@ import cards.modid.card.PowerCard;
 import cards.modid.client.ClientCardState;
 import cards.modid.component.CardSlotsComponent;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.HudRenderPhase;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.resources.Identifier;
 import cards.modid.PowerCaeds;
 
@@ -26,15 +25,14 @@ public class CardHudRenderer {
     private static final int BAR_H   = 3;
 
     public static void register() {
-        HudElementRegistry.attachToElement(
+        HudElementRegistry.attachElementAfter(
                 net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements.HOTBAR,
-                HudRenderPhase.AFTER,
                 Identifier.fromNamespaceAndPath(PowerCaeds.MOD_ID, "card_hud"),
-                CardHudRenderer::render
+                CardHudRenderer::extractRenderState
         );
     }
 
-    private static void render(GuiGraphics graphics, DeltaTracker delta) {
+    private static void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker delta) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.options.hideGui) return;
 
@@ -55,7 +53,7 @@ public class CardHudRenderer {
         }
     }
 
-    private static void drawCard(GuiGraphics g, int x, int y, int slot, PowerCard card) {
+    private static void drawCard(GuiGraphicsExtractor g, int x, int y, int slot, PowerCard card) {
         int primary   = card.getPrimaryColor();
         int secondary = card.getSecondaryColor();
         int w = CARD_W * SCALE;
@@ -79,7 +77,7 @@ public class CardHudRenderer {
         drawCooldownBar(g, x, y + h + 1, w, slot, card);
     }
 
-    private static void drawCardSymbol(GuiGraphics g, int cardX, int cardY, int secondary, PowerCard card) {
+    private static void drawCardSymbol(GuiGraphicsExtractor g, int cardX, int cardY, int secondary, PowerCard card) {
         int ox = cardX + 3 * SCALE;
         int oy = cardY + 3 * SCALE;
         int color = 0xFF000000 | secondary;
@@ -95,7 +93,7 @@ public class CardHudRenderer {
         }
     }
 
-    private static void drawCooldownBar(GuiGraphics g, int x, int y, int w, int slot, PowerCard card) {
+    private static void drawCooldownBar(GuiGraphicsExtractor g, int x, int y, int w, int slot, PowerCard card) {
         float progress = ClientCardState.getCooldownProgress(slot);
         g.fill(x, y, x + w, y + BAR_H, 0xFF333333);
         int filled = (int) (w * (1f - progress));
@@ -103,7 +101,7 @@ public class CardHudRenderer {
         if (filled > 0) g.fill(x, y, x + filled, y + BAR_H, 0xFF000000 | barColor);
     }
 
-    private static void drawEmptySlot(GuiGraphics g, int x, int y) {
+    private static void drawEmptySlot(GuiGraphicsExtractor g, int x, int y) {
         int w = CARD_W * SCALE, h = CARD_H * SCALE, s = SCALE;
         g.fill(x,         y,         x + w, y + s,     0x44FFFFFF);
         g.fill(x,         y + h - s, x + w, y + h,     0x44FFFFFF);
