@@ -24,13 +24,13 @@ public record SyncCardSlotsPacket(List<ItemStack> slots, List<Integer> cooldowns
             StreamCodec.of(
                     (buf, p) -> {
                         buf.writeInt(p.slots().size());
-                        for (ItemStack s : p.slots()) ItemStack.STREAM_CODEC.encode(buf, s);
+                        for (ItemStack s : p.slots()) ItemStack.OPTIONAL_STREAM_CODEC.encode(buf, s);
                         for (int cd : p.cooldowns()) buf.writeInt(cd);
                     },
                     buf -> {
                         int n = buf.readInt();
                         List<ItemStack> slots = new ArrayList<>(n);
-                        for (int i = 0; i < n; i++) slots.add(ItemStack.STREAM_CODEC.decode(buf));
+                        for (int i = 0; i < n; i++) slots.add(ItemStack.OPTIONAL_STREAM_CODEC.decode(buf));
                         List<Integer> cds = new ArrayList<>(n);
                         for (int i = 0; i < n; i++) cds.add(buf.readInt());
                         return new SyncCardSlotsPacket(slots, cds);
