@@ -2,6 +2,7 @@ package cards.modid.card;
 
 import cards.modid.PowerCaeds;
 import cards.modid.card.impl.SpeedCard;
+import cards.modid.card.impl.TotemCard;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -30,6 +31,8 @@ public class CardRegistry {
     // ── Cards ─────────────────────────────────────────────────────────────────
     public static final SpeedCard SPEED_CARD =
             register("speed_card", SpeedCard::new);
+    public static final TotemCard TOTEM_CARD =
+            register("totem_card", TotemCard::new);
 
     // ── Internal ──────────────────────────────────────────────────────────────
     private static <T extends PowerCard> T register(String name, Function<Item.Properties, T> factory) {

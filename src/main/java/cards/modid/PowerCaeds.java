@@ -1,6 +1,7 @@
 package cards.modid;
 
 import cards.modid.card.CardRegistry;
+import cards.modid.handler.CardDeathHandler;
 import cards.modid.handler.CardLootHandler;
 import cards.modid.handler.CardTickHandler;
 import cards.modid.handler.PlayerJoinHandler;
@@ -34,6 +35,7 @@ public class PowerCaeds implements ModInitializer {
 
         // 4. Server-side event handlers
         CardTickHandler.register();
+        CardDeathHandler.register();
         PlayerJoinHandler.register();
 
         LOGGER.info("[PowerCaeds] Ready! {} card(s) registered.", CardRegistry.getCount());
