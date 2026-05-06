@@ -22,7 +22,8 @@ public class CardHudRenderer {
     private static final int GAP     = 4;
     private static final int MARGIN_RIGHT  = 8;
     private static final int MARGIN_BOTTOM = 60;
-    private static final int BAR_H   = 3;
+    private static final int BAR_H   = 4;
+    private static final int COOLDOWN_TEXT_OFFSET = 9;
 
     public static void register() {
         HudElementRegistry.attachElementAfter(
@@ -39,12 +40,12 @@ public class CardHudRenderer {
         int screenW = mc.getWindow().getGuiScaledWidth();
         int screenH = mc.getWindow().getGuiScaledHeight();
 
-        int totalH = CardSlotsComponent.SLOT_COUNT * (CARD_H * SCALE + BAR_H + GAP);
+        int totalH = CardSlotsComponent.SLOT_COUNT * (CARD_H * SCALE + BAR_H + COOLDOWN_TEXT_OFFSET + GAP);
         int startY = screenH - MARGIN_BOTTOM - totalH;
 
         for (int i = 0; i < CardSlotsComponent.SLOT_COUNT; i++) {
             int x = screenW - MARGIN_RIGHT - CARD_W * SCALE;
-            int y = startY + i * (CARD_H * SCALE + BAR_H + GAP);
+            int y = startY + i * (CARD_H * SCALE + BAR_H + COOLDOWN_TEXT_OFFSET + GAP);
             if (ClientCardState.hasCard(i)) {
                 drawCard(graphics, x, y, i, ClientCardState.getCardItem(i));
             } else {
@@ -74,7 +75,7 @@ public class CardHudRenderer {
             g.fill(x + s, y + h - overlayH, x + w - s, y + h - s, 0xAA000000);
         }
 
-        drawCooldownBar(g, x, y + h + 1, w, slot, card);
+        drawCooldownBar(g, x, y + h + COOLDOWN_TEXT_OFFSET, w, slot, card);
     }
 
     private static void drawCardSymbol(GuiGraphicsExtractor g, int cardX, int cardY, int secondary, PowerCard card) {
@@ -94,11 +95,22 @@ public class CardHudRenderer {
     }
 
     private static void drawCooldownBar(GuiGraphicsExtractor g, int x, int y, int w, int slot, PowerCard card) {
-        float progress = ClientCardState.getCooldownProgress(slot);
-        g.fill(x, y, x + w, y + BAR_H, 0xFF333333);
-        int filled = (int) (w * (1f - progress));
-        int barColor = progress > 0f ? 0xFFCC2222 : 0xFF22CC44;
-        if (filled > 0) g.fill(x, y, x + filled, y + BAR_H, 0xFF000000 | barColor);
+        float cooldownProgress = ClientCardState.getCooldownProgress(slot);
+        float readyProgress = 1f - cooldownProgress;
+        int filled = Math.round(w * readyProgress);
+
+        g.fill(x, y, x + w, y + BAR_H, 0xFFAA2222);
+        if (filled > 0) {
+            g.fill(x, y, x + filled, y + BAR_H, 0xFF22CC44);
+        }
+        g.fill(x, y, x + w, y + 1, 0xAA000000);
+
+        int cooldownTicks = ClientCardState.getCooldown(slot);
+        if (cooldownTicks > 0) {
+            String cooldownText = Math.ceilDiv(cooldownTicks, 20) + "s";
+            Minecraft mc = Minecraft.getInstance();
+            g.centeredText(mc.font, cooldownText, x + w / 2, y - COOLDOWN_TEXT_OFFSET, 0xFFFFFFFF);
+        }
     }
 
     private static void drawEmptySlot(GuiGraphicsExtractor g, int x, int y) {

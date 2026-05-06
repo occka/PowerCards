@@ -32,6 +32,7 @@ public class CardEquipScreen extends Screen {
     private static final int SLOT_SIZE  = 32;
     private static final int SLOT_GAP   = 8;
     private static final int INV_SLOT   = 18; // vanilla slot size
+    private static final int COOLDOWN_BAR_H = 4;
 
     private int centerX, centerY;
 
@@ -115,10 +116,30 @@ public class CardEquipScreen extends Screen {
 
             // Slot number label
             g.text(font, String.valueOf(slot + 1), x + 2, y + 2, 0xFFFFAA00);
+            renderCooldownBar(g, slot, x, y + SLOT_SIZE + 12);
         } else {
             // Empty slot label
             g.centeredText(font, String.valueOf(slot + 1),
                     x + SLOT_SIZE / 2, y + SLOT_SIZE / 2 - 4, 0xFF666666);
+        }
+    }
+
+
+    private void renderCooldownBar(GuiGraphicsExtractor g, int slot, int x, int y) {
+        int cooldownTicks = ClientCardState.getCooldown(slot);
+        float cooldownProgress = ClientCardState.getCooldownProgress(slot);
+        float readyProgress = 1f - cooldownProgress;
+        int filled = Math.round(SLOT_SIZE * readyProgress);
+
+        g.fill(x, y, x + SLOT_SIZE, y + COOLDOWN_BAR_H, 0xFFAA2222);
+        if (filled > 0) {
+            g.fill(x, y, x + filled, y + COOLDOWN_BAR_H, 0xFF22CC44);
+        }
+        g.fill(x, y, x + SLOT_SIZE, y + 1, 0xAA000000);
+
+        if (cooldownTicks > 0) {
+            String cooldownText = Math.ceilDiv(cooldownTicks, 20) + "s";
+            g.centeredText(font, cooldownText, x + SLOT_SIZE / 2, y - 10, 0xFFFFFFFF);
         }
     }
 

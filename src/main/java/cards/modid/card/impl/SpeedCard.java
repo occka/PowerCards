@@ -33,6 +33,6 @@ public class SpeedCard extends PowerCard {
         Holder<MobEffect> speed = BuiltInRegistries.MOB_EFFECT
                 .get(Identifier.withDefaultNamespace("speed"))
                 .orElseThrow(() -> new IllegalStateException("Speed effect not found"));
-        player.addEffect(new MobEffectInstance(speed, 5 * 20, 1, false, true, true));
+        player.addEffect(new MobEffectInstance(speed, 5 * 20, 1, false, false, true));
     }
 }
