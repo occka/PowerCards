@@ -61,8 +61,7 @@ public class CardEquipScreen extends Screen {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
-        // Dim background
-        extractBackground(g, mouseX, mouseY, delta);
+        // Background is extracted by Screen.extractRenderStateWithTooltipAndSubtitles before this method.
 
         // Title
         g.centeredText(font, title, centerX, centerY - 100, 0xFFFFFF);
