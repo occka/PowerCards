@@ -6,9 +6,9 @@ import cards.modid.component.CardSlotsComponent;
 import cards.modid.network.EquipCardPacket;
 import cards.modid.network.UnequipCardPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
@@ -60,12 +60,11 @@ public class CardEquipScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics g, int mouseX, int mouseY, float delta) {
-        // Dim background
-        renderBackground(g, mouseX, mouseY, delta);
+    public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+        // Background is extracted by Screen.extractRenderStateWithTooltipAndSubtitles before this method.
 
         // Title
-        g.drawCenteredString(font, title, centerX, centerY - 100, 0xFFFFFF);
+        g.centeredText(font, title, centerX, centerY - 100, 0xFFFFFF);
 
         // Draw card slots
         for (int i = 0; i < CardSlotsComponent.SLOT_COUNT; i++) {
@@ -78,14 +77,14 @@ public class CardEquipScreen extends Screen {
         // Tooltip
         for (int i = 0; i < CardSlotsComponent.SLOT_COUNT; i++) {
             if (isHoveringSlot(i, mouseX, mouseY) && ClientCardState.hasCard(i)) {
-                g.renderTooltip(font, ClientCardState.getCard(i), mouseX, mouseY);
+                g.setTooltipForNextFrame(font, ClientCardState.getCard(i), mouseX, mouseY);
             }
         }
 
-        super.render(g, mouseX, mouseY, delta);
+        super.extractRenderState(g, mouseX, mouseY, delta);
     }
 
-    private void renderCardSlot(GuiGraphics g, int slot, int mouseX, int mouseY) {
+    private void renderCardSlot(GuiGraphicsExtractor g, int slot, int mouseX, int mouseY) {
         int x = slotPos[slot][0];
         int y = slotPos[slot][1];
         boolean hovering = isHoveringSlot(slot, mouseX, mouseY);
@@ -104,7 +103,7 @@ public class CardEquipScreen extends Screen {
         if (ClientCardState.hasCard(slot)) {
             // Draw the card item
             ItemStack stack = ClientCardState.getCard(slot);
-            g.renderItem(stack, x + 8, y + 8);
+            g.item(stack, x + 8, y + 8);
 
             // Cooldown overlay
             float cd = ClientCardState.getCooldownProgress(slot);
@@ -115,15 +114,15 @@ public class CardEquipScreen extends Screen {
             }
 
             // Slot number label
-            g.drawString(font, String.valueOf(slot + 1), x + 2, y + 2, 0xFFFFAA00);
+            g.text(font, String.valueOf(slot + 1), x + 2, y + 2, 0xFFFFAA00);
         } else {
             // Empty slot label
-            g.drawCenteredString(font, String.valueOf(slot + 1),
+            g.centeredText(font, String.valueOf(slot + 1),
                     x + SLOT_SIZE / 2, y + SLOT_SIZE / 2 - 4, 0xFF666666);
         }
     }
 
-    private void renderInventory(GuiGraphics g, int mouseX, int mouseY) {
+    private void renderInventory(GuiGraphicsExtractor g, int mouseX, int mouseY) {
         assert minecraft != null;
         var inv = minecraft.player.getInventory();
 
@@ -147,7 +146,7 @@ public class CardEquipScreen extends Screen {
         }
     }
 
-    private void renderInvSlot(GuiGraphics g, ItemStack stack, int x, int y,
+    private void renderInvSlot(GuiGraphicsExtractor g, ItemStack stack, int x, int y,
                                 int invIndex, int mouseX, int mouseY) {
         boolean isPowerCard = !stack.isEmpty() && stack.getItem() instanceof PowerCard;
         boolean hovering = mouseX >= x && mouseX < x + INV_SLOT
@@ -161,18 +160,18 @@ public class CardEquipScreen extends Screen {
         g.fill(x, y, x + 1, y + INV_SLOT, 0xFF555555);
 
         if (!stack.isEmpty()) {
-            g.renderItem(stack, x + 1, y + 1);
-            g.renderItemDecorations(font, stack, x + 1, y + 1);
+            g.item(stack, x + 1, y + 1);
+            g.itemDecorations(font, stack, x + 1, y + 1);
         }
 
         if (hovering && !stack.isEmpty()) {
-            g.renderTooltip(font, stack, mouseX, mouseY);
+            g.setTooltipForNextFrame(font, stack, mouseX, mouseY);
         }
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        int mx = (int) mouseX, my = (int) mouseY;
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        int mx = (int) event.x(), my = (int) event.y();
 
         // Click on a card slot
         for (int i = 0; i < CardSlotsComponent.SLOT_COUNT; i++) {
@@ -204,7 +203,7 @@ public class CardEquipScreen extends Screen {
             }
         }
 
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
     // ─── Helpers ──────────────────────────────────────────────────────────────
