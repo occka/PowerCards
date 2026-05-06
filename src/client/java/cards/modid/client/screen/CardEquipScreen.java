@@ -7,8 +7,8 @@ import cards.modid.network.EquipCardPacket;
 import cards.modid.network.UnequipCardPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
@@ -60,11 +60,12 @@ public class CardEquipScreen extends Screen {
     }
 
     @Override
-     public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
         // Dim background
         extractBackground(g, mouseX, mouseY, delta);
+
         // Title
-       g.centeredText(font, title, centerX, centerY - 100, 0xFFFFFF);
+        g.centeredText(font, title, centerX, centerY - 100, 0xFFFFFF);
 
         // Draw card slots
         for (int i = 0; i < CardSlotsComponent.SLOT_COUNT; i++) {
@@ -84,7 +85,7 @@ public class CardEquipScreen extends Screen {
         super.extractRenderState(g, mouseX, mouseY, delta);
     }
 
-     private void renderCardSlot(GuiGraphicsExtractor g, int slot, int mouseX, int mouseY) {
+    private void renderCardSlot(GuiGraphicsExtractor g, int slot, int mouseX, int mouseY) {
         int x = slotPos[slot][0];
         int y = slotPos[slot][1];
         boolean hovering = isHoveringSlot(slot, mouseX, mouseY);
@@ -103,7 +104,7 @@ public class CardEquipScreen extends Screen {
         if (ClientCardState.hasCard(slot)) {
             // Draw the card item
             ItemStack stack = ClientCardState.getCard(slot);
-             g.item(stack, x + 8, y + 8);
+            g.item(stack, x + 8, y + 8);
 
             // Cooldown overlay
             float cd = ClientCardState.getCooldownProgress(slot);
@@ -117,7 +118,7 @@ public class CardEquipScreen extends Screen {
             g.text(font, String.valueOf(slot + 1), x + 2, y + 2, 0xFFFFAA00);
         } else {
             // Empty slot label
-             g.centeredText(font, String.valueOf(slot + 1),
+            g.centeredText(font, String.valueOf(slot + 1),
                     x + SLOT_SIZE / 2, y + SLOT_SIZE / 2 - 4, 0xFF666666);
         }
     }
@@ -160,7 +161,7 @@ public class CardEquipScreen extends Screen {
         g.fill(x, y, x + 1, y + INV_SLOT, 0xFF555555);
 
         if (!stack.isEmpty()) {
-           g.item(stack, x + 1, y + 1);
+            g.item(stack, x + 1, y + 1);
             g.itemDecorations(font, stack, x + 1, y + 1);
         }
 

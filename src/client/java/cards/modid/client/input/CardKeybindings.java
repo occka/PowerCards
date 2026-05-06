@@ -24,7 +24,7 @@ import net.minecraft.resources.Identifier;
  */
 public class CardKeybindings {
 
-     private static final KeyMapping.Category CATEGORY =
+    private static final KeyMapping.Category CATEGORY =
             KeyMapping.Category.register(Identifier.fromNamespaceAndPath(PowerCaeds.MOD_ID, "power_cards"));
 
     public static final KeyMapping[] SLOT_KEYS = new KeyMapping[]{
