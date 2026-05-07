@@ -1,6 +1,5 @@
 {
   "itemGroup.powercaeds.cards": "Power Cards",
-
   "item.powercaeds.speed_card": "Speed Card",
   "item.powercaeds.speed_card.desc": "Grants Speed II for 5 seconds.",
   "item.powercaeds.totem_card": "Totem Card",
@@ -9,14 +8,17 @@
   "item.powercaeds.dash_card.desc": "Dash 10 blocks in the direction you are looking. Grants Slow Falling for 3s.",
   "item.powercaeds.midas_card": "Midas Card",
   "item.powercaeds.midas_card.desc": "Passively turns your items and blocks beneath you into gold. Increases your size.",
-
   "item.powercaeds.card.cooldown": "Cooldown: %ss",
-
   "key.category.powercaeds": "Power Cards",
   "key.powercaeds.slot_0": "Activate Card Slot 1",
   "key.powercaeds.slot_1": "Activate Card Slot 2",
   "key.powercaeds.slot_2": "Activate Card Slot 3",
   "key.powercaeds.open_screen": "Open Card Screen",
-
-  "screen.powercaeds.card_equip": "Power Cards"
+  "screen.powercaeds.card_equip": "Power Cards",
+  "item.powercaeds.skeleton_card": "Skeleton Card",
+  "item.powercaeds.skeleton_card.desc": "Shoots a strong arrow in your aim direction.",
+  "item.powercaeds.ghast_card": "Ghast Card",
+  "item.powercaeds.ghast_card.desc": "Launches an empowered fireball in your aim direction.",
+  "item.powercaeds.ancient_card": "Ancient Card",
+  "item.powercaeds.ancient_card.desc": "Fires a 15-block magic beam that damages and slows enemies."
 }
