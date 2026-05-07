@@ -1,6 +1,8 @@
 package cards.modid.card;
 
 import cards.modid.PowerCaeds;
+import cards.modid.card.impl.DashCard;
+import cards.modid.card.impl.MidasCard;
 import cards.modid.card.impl.SpeedCard;
 import cards.modid.card.impl.TotemCard;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -33,6 +35,10 @@ public class CardRegistry {
             register("speed_card", SpeedCard::new);
     public static final TotemCard TOTEM_CARD =
             register("totem_card", TotemCard::new);
+    public static final DashCard DASH_CARD =
+            register("dash_card", DashCard::new);
+    public static final MidasCard MIDAS_CARD =
+            register("midas_card", MidasCard::new);
 
     // ── Internal ──────────────────────────────────────────────────────────────
     private static <T extends PowerCard> T register(String name, Function<Item.Properties, T> factory) {
@@ -45,8 +51,6 @@ public class CardRegistry {
     }
 
     public static void init() {
-        // Add all cards to the TOOLS_AND_UTILITIES tab (no custom tab needed,
-        // avoids FabricItemGroup API issues — easy to change later)
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(
                 entries -> BuiltInRegistries.ITEM.stream()
                         .filter(i -> i instanceof PowerCard)

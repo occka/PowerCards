@@ -5,6 +5,10 @@
   "item.powercaeds.speed_card.desc": "Grants Speed II for 5 seconds.",
   "item.powercaeds.totem_card": "Totem Card",
   "item.powercaeds.totem_card.desc": "Passively saves you from lethal damage, then goes on a 5 minute cooldown.",
+  "item.powercaeds.dash_card": "Dash Card",
+  "item.powercaeds.dash_card.desc": "Dash 10 blocks in the direction you are looking. Grants Slow Falling for 3s.",
+  "item.powercaeds.midas_card": "Midas Card",
+  "item.powercaeds.midas_card.desc": "Passively turns your items and blocks beneath you into gold. Increases your size.",
 
   "item.powercaeds.card.cooldown": "Cooldown: %ss",
 
