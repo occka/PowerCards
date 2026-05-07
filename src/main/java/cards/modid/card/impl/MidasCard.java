@@ -195,12 +195,28 @@ public class MidasCard extends PowerCard {
             // Never convert golden items (already gold)
             if (isAlreadyGold(item)) continue;
 
-            Item replacement = GOLD_REPLACEMENTS.get(item);
+            Item replacement = getReplacementForItem(item);
             if (replacement != null) {
                 int count = stack.getCount();
                 inventory.setItem(i, new ItemStack(replacement, count));
             }
         }
+    }
+
+    private Item getReplacementForItem(Item item) {
+        if (item == Items.APPLE) {
+            return Items.GOLDEN_APPLE;
+        }
+
+        if (item == Items.CARROT) {
+            return Items.GOLDEN_CARROT;
+        }
+
+        if (item.components().get(net.minecraft.core.component.DataComponents.FOOD) != null) {
+            return Items.GOLD_INGOT;
+        }
+
+        return GOLD_REPLACEMENTS.get(item);
     }
 
     private boolean isAlreadyGold(Item item) {
