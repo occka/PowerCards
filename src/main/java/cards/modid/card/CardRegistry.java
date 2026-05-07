@@ -2,7 +2,12 @@ package cards.modid.card;
 
 import cards.modid.PowerCaeds;
 import cards.modid.card.impl.DashCard;
+import cards.modid.card.impl.GhastCard;
+import cards.modid.card.impl.GlockCard;
 import cards.modid.card.impl.MidasCard;
+import cards.modid.card.impl.NovaCard;
+import cards.modid.card.impl.AncientCard;
+import cards.modid.card.impl.SkeletonCard;
 import cards.modid.card.impl.SpeedCard;
 import cards.modid.card.impl.TotemCard;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -39,6 +44,16 @@ public class CardRegistry {
             register("dash_card", DashCard::new);
     public static final MidasCard MIDAS_CARD =
             register("midas_card", MidasCard::new);
+    public static final SkeletonCard SKELETON_CARD =
+            register("skeleton_card", SkeletonCard::new);
+    public static final GhastCard GHAST_CARD =
+            register("ghast_card", GhastCard::new);
+    public static final AncientCard ANCIENT_CARD =
+            register("ancient_card", AncientCard::new);
+    public static final GlockCard GLOCK_CARD =
+            register("glock_card", GlockCard::new);
+    public static final NovaCard NOVA_CARD =
+            register("nova_card", NovaCard::new);
 
     // ── Internal ──────────────────────────────────────────────────────────────
     private static <T extends PowerCard> T register(String name, Function<Item.Properties, T> factory) {

@@ -1,6 +1,7 @@
 package cards.modid.handler;
 
 import cards.modid.card.PowerCard;
+import cards.modid.card.impl.MidasCard;
 import cards.modid.component.CardSlotsComponent;
 import cards.modid.network.SyncCardSlotsPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,6 +27,11 @@ public class CardSlotHandler {
         ItemStack card = comp.getCard(slot).copy();
         comp.setCard(slot, ItemStack.EMPTY);
         comp.setCooldown(slot, 0);
+
+        if (card.getItem() instanceof MidasCard) {
+            MidasCard.removeScale(player);
+        }
+
         if (!player.getInventory().add(card)) player.drop(card, false);
         sync(player, comp);
         return card;

@@ -20,6 +20,10 @@ public class CardTickHandler {
                     comp.getCardItem(i).tickEffect(player, player.level(), i);
                 }
             }
+
+            player.level().getEntities(player, player.getBoundingBox().inflate(256), entity ->
+                    entity.hasCustomName() && "powercaeds_ghast_card_fireball".equals(entity.getCustomName() != null ? entity.getCustomName().getString() : "") && entity.tickCount >= 10 * 20
+            ).forEach(entity -> entity.discard());
         }
     }
 }
