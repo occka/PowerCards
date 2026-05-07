@@ -31,6 +31,7 @@ public class GhastCard extends PowerCard {
         fireball.setPos(player.getX() + look.x * 1.2, player.getEyeY() - 0.15, player.getZ() + look.z * 1.2);
         fireball.setDeltaMovement(look.scale(0.9));
         fireball.setCustomName(Component.literal("powercaeds_ghast_card_fireball"));
+        fireball.setCustomNameVisible(false);
         serverLevel.addFreshEntity(fireball);
 
         serverLevel.playSound(null, player.getX(), player.getY(), player.getZ(),

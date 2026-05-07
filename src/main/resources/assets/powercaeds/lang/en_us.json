@@ -20,5 +20,9 @@
   "item.powercaeds.ghast_card": "Ghast Card",
   "item.powercaeds.ghast_card.desc": "Launches an empowered fireball in your aim direction.",
   "item.powercaeds.ancient_card": "Ancient Card",
-  "item.powercaeds.ancient_card.desc": "Fires a 15-block magic beam that damages and slows enemies."
+  "item.powercaeds.ancient_card.desc": "Fires a 15-block magic beam that damages and slows enemies.",
+  "item.powercaeds.glock_card": "Glock Card",
+  "item.powercaeds.glock_card.desc": "8 charges. Fires a hitscan shot for 4 damage. Empty magazine triggers 30s cooldown.",
+  "item.powercaeds.nova_card": "Nova Card",
+  "item.powercaeds.nova_card.desc": "Creates paired portals; entering the first teleports you to the second."
 }
