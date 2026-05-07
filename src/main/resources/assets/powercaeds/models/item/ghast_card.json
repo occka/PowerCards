@@ -1,1 +1,6 @@
-{ "parent": "minecraft:item/paper" }
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "powercaeds:item/ghast_card"
+  }
+}
