@@ -2,9 +2,7 @@ package cards.modid.card.impl;
 
 import cards.modid.card.PowerCard;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -95,23 +93,6 @@ public class MidasCard extends PowerCard {
         Map.entry(Items.DIAMOND_BLOCK,  Items.GOLD_BLOCK),
         Map.entry(Items.EMERALD,        Items.GOLD_INGOT),
         Map.entry(Items.EMERALD_BLOCK,  Items.GOLD_BLOCK)
-    );
-
-    /**
-     * Blocks that should become gold beneath the player's feet.
-     * Water and air are excluded (air is NEVER solid, water excluded explicitly).
-     */
-    private static final Map<net.minecraft.world.level.block.Block,
-                             net.minecraft.world.level.block.Block> BLOCK_GOLD_MAP = Map.of(
-        Blocks.STONE,        Blocks.GOLD_BLOCK,
-        Blocks.COBBLESTONE,  Blocks.GOLD_BLOCK,
-        Blocks.DIRT,         Blocks.GOLD_BLOCK,
-        Blocks.GRASS_BLOCK,  Blocks.GOLD_BLOCK,
-        Blocks.SAND,         Blocks.GOLD_BLOCK,
-        Blocks.GRAVEL,       Blocks.GOLD_BLOCK,
-        Blocks.NETHERRACK,   Blocks.GOLD_BLOCK,
-        Blocks.OAK_PLANKS,   Blocks.GOLD_BLOCK,
-        Blocks.SPRUCE_PLANKS,Blocks.GOLD_BLOCK
     );
 
     public MidasCard(Item.Properties properties) { super(properties); }
@@ -224,7 +205,8 @@ public class MidasCard extends PowerCard {
             || item == Items.GOLDEN_AXE     || item == Items.GOLDEN_SHOVEL
             || item == Items.GOLDEN_HOE     || item == Items.GOLDEN_HELMET
             || item == Items.GOLDEN_CHESTPLATE || item == Items.GOLDEN_LEGGINGS
-            || item == Items.GOLDEN_BOOTS   || item == Items.GOLD_INGOT
+            || item == Items.GOLDEN_BOOTS   || item == Items.GOLDEN_APPLE
+            || item == Items.GOLDEN_CARROT  || item == Items.GOLD_INGOT
             || item == Items.GOLD_BLOCK     || item == Items.GOLD_NUGGET
             || item == Items.RAW_GOLD       || item == Items.RAW_GOLD_BLOCK;
     }
@@ -239,16 +221,13 @@ public class MidasCard extends PowerCard {
                 BlockPos pos = feet.offset(dx, 0, dz);
                 BlockState state = level.getBlockState(pos);
 
-                // Never convert water/lava/air
+                // Never convert water/lava/air/bedrock
                 if (state.isAir()) continue;
                 if (state.is(Blocks.WATER) || state.is(Blocks.LAVA)) continue;
+                if (state.is(Blocks.BEDROCK)) continue;
                 // Don't touch already-gold blocks
                 if (state.is(Blocks.GOLD_BLOCK) || state.is(Blocks.RAW_GOLD_BLOCK)) continue;
-
-                var goldBlock = BLOCK_GOLD_MAP.get(state.getBlock());
-                if (goldBlock != null) {
-                    level.setBlock(pos, goldBlock.defaultBlockState(), 3);
-                }
+                level.setBlock(pos, Blocks.GOLD_BLOCK.defaultBlockState(), 3);
             }
         }
     }
