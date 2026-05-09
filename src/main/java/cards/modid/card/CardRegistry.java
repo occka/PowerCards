@@ -7,9 +7,22 @@ import cards.modid.card.impl.GlockCard;
 import cards.modid.card.impl.MidasCard;
 import cards.modid.card.impl.NovaCard;
 import cards.modid.card.impl.AncientCard;
+import cards.modid.card.impl.AnchorCard;
+import cards.modid.card.impl.ArtzCard;
+import cards.modid.card.impl.BlazeCard;
+import cards.modid.card.impl.ChestCard;
+import cards.modid.card.impl.DeepCard;
+import cards.modid.card.impl.ForcewallCard;
+import cards.modid.card.impl.FreezeCard;
+import cards.modid.card.impl.InvisCard;
+import cards.modid.card.impl.MayhemCard;
+import cards.modid.card.impl.Md49Card;
+import cards.modid.card.impl.MinerCard;
 import cards.modid.card.impl.SkeletonCard;
 import cards.modid.card.impl.SpeedCard;
 import cards.modid.card.impl.TotemCard;
+import cards.modid.card.impl.TurmCard;
+import cards.modid.card.impl.TimeStopCard;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -54,6 +67,32 @@ public class CardRegistry {
             register("glock_card", GlockCard::new);
     public static final NovaCard NOVA_CARD =
             register("nova_card", NovaCard::new);
+    public static final MinerCard MINER_CARD =
+            register("miner_card", MinerCard::new);
+    public static final ChestCard CHEST_CARD =
+            register("chest_card", ChestCard::new);
+    public static final BlazeCard BLAZE_CARD =
+            register("blaze_card", BlazeCard::new);
+    public static final AnchorCard ANCHOR_CARD =
+            register("anchor_card", AnchorCard::new);
+    public static final ForcewallCard FORCEWALL_CARD =
+            register("forcewall_card", ForcewallCard::new);
+    public static final FreezeCard FREEZE_CARD =
+            register("freeze_card", FreezeCard::new);
+    public static final TimeStopCard TIMESTOP_CARD =
+            register("timestop_card", TimeStopCard::new);
+    public static final InvisCard INVIS_CARD =
+            register("invis_card", InvisCard::new);
+    public static final MayhemCard MAYHEM_CARD =
+            register("mayhem_card", MayhemCard::new);
+    public static final TurmCard TURM_CARD =
+            register("turm_card", TurmCard::new);
+    public static final DeepCard DEEP_CARD =
+            register("deep_card", DeepCard::new);
+    public static final ArtzCard ARTZ_CARD =
+            register("artz_card", ArtzCard::new);
+    public static final Md49Card MD49_CARD =
+            register("md49_card", Md49Card::new);
 
     // ── Internal ──────────────────────────────────────────────────────────────
     private static <T extends PowerCard> T register(String name, Function<Item.Properties, T> factory) {

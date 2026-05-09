@@ -12,7 +12,14 @@ public class CardSlotHandler {
     public static boolean equipCard(ServerPlayer player, ItemStack stack, int slot) {
         if (slot < 0 || slot >= CardSlotsComponent.SLOT_COUNT) return false;
         if (stack.isEmpty() || !(stack.getItem() instanceof PowerCard)) return false;
+        PowerCard card = (PowerCard) stack.getItem();
         CardSlotsComponent comp = player.getAttachedOrCreate(CardSlotsComponent.TYPE);
+        if (comp.hasCard(slot) && comp.isOnCooldown(slot)) return false;
+        if (!card.allowsDuplicateEquip()) {
+            for (int i = 0; i < CardSlotsComponent.SLOT_COUNT; i++) {
+                if (i != slot && comp.hasCard(i) && comp.getCardItem(i) == card) return false;
+            }
+        }
         if (comp.hasCard(slot)) unequipCard(player, slot);
         comp.setCard(slot, stack.copyWithCount(1));
         stack.shrink(1);
@@ -24,6 +31,7 @@ public class CardSlotHandler {
         if (slot < 0 || slot >= CardSlotsComponent.SLOT_COUNT) return ItemStack.EMPTY;
         CardSlotsComponent comp = player.getAttachedOrCreate(CardSlotsComponent.TYPE);
         if (!comp.hasCard(slot)) return ItemStack.EMPTY;
+        if (comp.isOnCooldown(slot)) return ItemStack.EMPTY;
         ItemStack card = comp.getCard(slot).copy();
         comp.setCard(slot, ItemStack.EMPTY);
         comp.setCooldown(slot, 0);

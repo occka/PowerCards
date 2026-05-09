@@ -24,6 +24,14 @@ public abstract class PowerCard extends Item {
     public abstract int getSecondaryColor();
 
     /**
+     * Most active cards go on their declared cooldown immediately after activation.
+     * Cards with custom charge/reload behavior can opt out and manage slot cooldowns themselves.
+     */
+    public boolean usesDefaultCooldown() { return true; }
+
+    public boolean allowsDuplicateEquip() { return false; }
+
+    /**
      * Relative chance for this card to appear in structure/chest loot.
      * Higher values make the card more common; return 0 or less to disable chest loot for a card.
      */

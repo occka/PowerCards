@@ -32,7 +32,9 @@ public record ActivateCardPacket(int slotIndex) implements CustomPacketPayload {
                 PowerCard card = comp.getCardItem(slot);
                 if (!card.canActivate()) return;
                 card.applyEffect(player, player.level());
-                comp.setCooldown(slot, card.getCooldownTicks());
+                if (card.usesDefaultCooldown()) {
+                    comp.setCooldown(slot, card.getCooldownTicks());
+                }
                 SyncCardSlotsPacket.send(player, comp);
             });
         });
