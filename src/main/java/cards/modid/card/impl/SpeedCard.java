@@ -20,6 +20,7 @@ public class SpeedCard extends PowerCard {
     @Override public int getCooldownTicks()          { return 10 * 20; }
     @Override public int getPrimaryColor()           { return 0xFFCC00; }
     @Override public int getSecondaryColor()         { return 0x111111; }
+    @Override public boolean allowsDuplicateEquip() { return true; }
 
     @Override
     public int[] getSymbolPattern() {
@@ -33,6 +34,6 @@ public class SpeedCard extends PowerCard {
         Holder<MobEffect> speed = BuiltInRegistries.MOB_EFFECT
                 .get(Identifier.withDefaultNamespace("speed"))
                 .orElseThrow(() -> new IllegalStateException("Speed effect not found"));
-        player.addEffect(new MobEffectInstance(speed, 5 * 20, 1, false, false, true));
+        player.addEffect(new MobEffectInstance(speed, 15 * 20, 4, false, false, true));
     }
 }

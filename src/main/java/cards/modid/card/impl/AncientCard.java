@@ -28,6 +28,7 @@ public class AncientCard extends PowerCard {
     @Override public int getPrimaryColor() { return 0x8FAF8F; }
     @Override public int getSecondaryColor() { return 0x5E6E5E; }
     @Override public int getStructureChestLootWeight() { return 1; }
+    @Override public boolean allowsDuplicateEquip() { return true; }
 
     @Override
     public void applyEffect(Player player, Level level) {

@@ -24,6 +24,7 @@ public class MinerCard extends PowerCard {
     @Override public int getPrimaryColor() { return 0x4C565A; }
     @Override public int getSecondaryColor() { return 0x55DDF2; }
     @Override public int getStructureChestLootWeight() { return 2; }
+    @Override public boolean allowsDuplicateEquip() { return true; }
 
     @Override
     public int[] getSymbolPattern() {

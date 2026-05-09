@@ -22,6 +22,7 @@ public class SkeletonCard extends PowerCard {
     @Override public int getPrimaryColor() { return 0x9E9E9E; }
     @Override public int getSecondaryColor() { return 0x616161; }
     @Override public int getStructureChestLootWeight() { return 5; }
+    @Override public boolean allowsDuplicateEquip() { return true; }
 
     @Override
     public void applyEffect(Player player, Level level) {

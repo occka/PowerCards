@@ -19,7 +19,7 @@ public class DashCard extends PowerCard {
      * включая вверх/вниз — рывок работает по взгляду в любую сторону.
      */
     private static final double DASH_POWER      = 3.0;
-    private static final int    SLOW_FALL_TICKS = 3 * 20;
+    private static final int    SLOW_FALL_TICKS = 6 * 20;
 
     public DashCard(Item.Properties properties) { super(properties); }
 
@@ -29,6 +29,7 @@ public class DashCard extends PowerCard {
     @Override public int getPrimaryColor()           { return 0x7FD8FF; }
     @Override public int getSecondaryColor()         { return 0x1A5FCC; }
     @Override public int getStructureChestLootWeight() { return 5; }
+    @Override public boolean allowsDuplicateEquip() { return true; }
 
     @Override
     public int[] getSymbolPattern() {

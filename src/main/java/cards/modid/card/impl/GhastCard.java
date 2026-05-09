@@ -21,6 +21,7 @@ public class GhastCard extends PowerCard {
     @Override public int getPrimaryColor() { return 0xE0E0E0; }
     @Override public int getSecondaryColor() { return 0x9E9E9E; }
     @Override public int getStructureChestLootWeight() { return 2; }
+    @Override public boolean allowsDuplicateEquip() { return true; }
 
     @Override
     public void applyEffect(Player player, Level level) {

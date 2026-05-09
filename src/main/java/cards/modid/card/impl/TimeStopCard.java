@@ -26,7 +26,7 @@ public class TimeStopCard extends PowerCard {
     @Override public int getCooldownTicks() { return 180 * 20; }
     @Override public int getPrimaryColor() { return 0xD9A629; }
     @Override public int getSecondaryColor() { return 0x62D8FF; }
-    @Override public int getStructureChestLootWeight() { return 1; }
+    @Override public int getStructureChestLootWeight() { return 0; }
     @Override public int[] getSymbolPattern() { return new int[]{0b11111,0b10001,0b01010,0b00100,0b01010,0b11111}; }
 
     @Override

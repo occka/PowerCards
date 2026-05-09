@@ -24,6 +24,7 @@ public class TotemCard extends PowerCard {
     @Override public int getPrimaryColor()           { return 0x2ECC40; }
     @Override public int getSecondaryColor()         { return 0xFFD83D; }
     @Override public int getStructureChestLootWeight() { return 1; }
+    @Override public boolean allowsDuplicateEquip() { return true; }
 
     @Override
     public int[] getSymbolPattern() {
