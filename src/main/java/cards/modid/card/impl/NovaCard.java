@@ -30,7 +30,7 @@ public class NovaCard extends PowerCard {
     @Override public int getCooldownTicks() { return 25 * 20; }
     @Override public int getPrimaryColor() { return 0x59BFFF; }
     @Override public int getSecondaryColor() { return 0xFF8A2A; }
-    @Override public int getStructureChestLootWeight() { return 1; }
+    @Override public int getStructureChestLootWeight() { return 3; }
 
     @Override
     public void applyEffect(Player player, Level level) {

@@ -21,7 +21,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 public class CardLootHandler {
 
     /** Empty entry keeps cards rare while still checking every chest loot table. */
-    private static final int EMPTY_WEIGHT = 100;
+    private static final int EMPTY_WEIGHT = 300;
 
     public static void register() {
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
